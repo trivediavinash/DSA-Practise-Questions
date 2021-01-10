@@ -55,3 +55,19 @@ bool keypair(vector<int> A, int N, int X)
 }
 
 
+lst=list(map(int ,input().split()))
+target=int(input())
+dic={}
+flag =True
+for i in range(len(lst)):
+
+    if (target-lst[i]) not in dic:
+        dic[lst[i]]=i
+    else:
+        print("true")
+        flag=False
+if flag==True:
+    print("false")        
+
+
+
