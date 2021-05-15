@@ -46,7 +46,7 @@ public:
         ListNode* curr=head->next;
         while(curr!=NULL ){
                if(curr->val==prev->val){
-                   ListNode*temp=prev->next;
+                   ListNode*temp=curr->next;
                    prev->next= curr->next;
                    
                    curr=curr->next;

@@ -65,3 +65,29 @@ public:
         
     }
     return true;
+
+3. O(N/2) For finding Middle elemnt + O(N) for comparing left and right elemnts
+
+O(N)  O(N)
+
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        ListNode *prev= NULL, *slow=head, *fast=head, *temp;
+        while(fast && fast->next){   //here fast->next for even length 1 2 2 1 
+            fast=fast->next->next;
+            temp=slow->next;  
+            slow->next=prev;
+            prev=slow;
+            slow=temp;
+        }
+        if(fast) slow=slow->next; //slow pointer will always be at the middle elemnt .  it is for odd lenght of linklist
+        while(slow){
+            if(prev->val!=slow->val) return false ;
+            prev=prev->next;
+            slow=slow->next;
+        }
+        return true;
+    }
+};
+

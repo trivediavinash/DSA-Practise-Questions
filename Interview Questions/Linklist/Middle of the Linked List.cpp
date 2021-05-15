@@ -84,3 +84,25 @@ public:
     }
 };
 
+4.
+
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        
+        ListNode* fast= head;
+        int c=0;
+        while(fast!=NULL ){
+             c++;
+            
+            fast=fast->next;
+        }
+        c=(c/2);
+        ListNode*t=head;
+        for(int i=0;i<c;i++){
+            t=t->next;
+        }
+        return t;
+    }
+};
+
