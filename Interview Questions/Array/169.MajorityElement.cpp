@@ -86,6 +86,8 @@ public:
 };
 
 
+
+
 3.2
 class Solution {
 public:
@@ -97,7 +99,65 @@ public:
     }
 };
 
-4.
+
+
+4. /*Time complexity : O(nlgn)
+
+Each recursive call to majority_element_rec performs two recursive calls on subslices of size n/2 and two linear scans of length 2n to calculate majority element. 
+
+​	
+ 
+
+Space complexity : O(lgn)O(lgn)
+
+Although the divide & conquer does not explicitly allocate any additional memory, it uses a non-constant amount of additional memory in stack frames due to recursion. Because the algorithm "cuts" the array in half at each level of recursion, it follows that there can only be O(lgn)O(lgn) "cuts" before the base case of 1 is reached. It follows from this fact that the resulting recursion tree is balanced, and therefore all paths from the root to a leaf are of length O(lgn)O(lgn). Because the recursion tree is traversed in a depth-first manner, the space complexity is therefore equivalent to the length of the longest path, which is, of course, O(lgn)O(lgn)*/
+
+
+class Solution {
+private:
+  
+        int countInRange(vector<int>& nums, int num, int low, int hi) {
+        int count = 0;
+        for (int i = low; i <= hi; i++) {
+            if (nums[i] == num) {
+                count++;
+            }
+        }
+        return count;
+    }
+private:
+     int majorityrec(vector<int>& nums,int low, int hi){
+         // base case; the only element in an array of size 1 is the majority
+        // element.
+         if(low==hi){
+             return nums[low];
+         }
+         int mid =(hi-low)/2+low;
+
+        // recurse on left and right halves of this slice.
+         int leftmajor=majorityrec( nums, low, mid);
+         int rightmajor=majorityrec( nums, mid+1, hi);
+
+     // if the two halves agree on the majority element, return it.
+         if(leftmajor==rightmajor) return leftmajor;
+         
+         
+        // otherwise, count each element and return the "winner".              //Either we can use ount funtion or 0r use countInRange funtion and count by this funtion.
+        
+        // int leftmajor = countInRange(nums, leftmajor, low, hi);
+       // int rightmajor = countInRange(nums, rightmajor, low, hi);
+       //return leftCount > rightCount ? left : right; 
+        return count(nums.begin() , nums.end() , leftmajor) > count(nums.begin(), nums.end(), rightmajor) ? leftmajor : rightmajor;
+       
+     } 
+public:
+    int majorityElement(vector<int>& nums) {
+        return majorityrec(nums,0, nums.size()-1);
+    }
+       
+       
+};
+
 
 
 
