@@ -13,8 +13,8 @@ Expected Auxiliary Space: O(N + M).
 
 */
 
-1. Using Unordered_set (implemented as hashtable O(1) constant lookup and insert.
-#include <bits/stdc++.h>
+1. Using Unordered_set (implemented as hashtable O(1) constant lookup and insert.can be done with map also
+ #include <bits/stdc++.h>
 using namespace std;
 #define fast ios_base::sync_with_stdio(0);cin.tie(NULL);
 
@@ -56,3 +56,26 @@ int main() {
    }
 	return 0;
 }
+
+
+// IN case of distinct elements in array 
+
+class Solution{
+    public:
+    //Function to return the count of number of elements in union of two arrays.
+    int doUnion(int a[], int n, int b[], int m)  {
+        int i=0, j=0, ans=0;
+        while(i<n && j<m){
+            if(a[i]==b[j]){
+                ans++;
+                i++;j++;
+            }
+            else if (a[i]>b[j]){
+                j++;
+            }
+            else i++;
+        }
+        return (n-ans)+(m-ans)+ans;
+    }
+};
+
