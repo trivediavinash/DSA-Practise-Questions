@@ -25,11 +25,62 @@ What if the given array is already sorted? How would you optimize your algorithm
 What if nums1's size is small compared to nums2's size? Which algorithm is better?
 What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?*/
 
-1. T.c. = O(NLogN) + O(MLogM) + O(N) + O(M)  S.c. =O(1)
+
+1.  TC O(N) +O(N) =O(N)     SC O(N)
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        
+        vector<int> res;
+        unordered_map<int, int > um ;
+      //  if(nums)
+        for(int i=0;i<nums1.size();i++){
+            um[nums1[i]]++;
+        }
+        
+        for(int i=0; i<nums2.size(); i++){
+            if(um.find(nums2[i])!=um.end() && um[nums2[i]] > 0){   //um[nums2[i]] > 0 check is necessary
+                res.push_back(nums2[i]);
+                um[nums2[i]]--;
+            }
+        }
+        return res;
+   
+    }
+};
+
+2.   TC O(N) +O(N) =O(N)     SC O(N)
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        
+        vector<int> res;
+        unordered_map<int, int > um ;
+      //  if(nums)
+        for(int i=0;i<nums1.size();i++){
+            um[nums1[i]]++;
+        }
+        
+        for(int i=0; i<nums2.size(); i++){
+            if(um[nums2[i]] > 0){
+                res.push_back(nums2[i]);
+                um[nums2[i]]--;
+            }
+        }
+        return res;
+   
+    }
+};
+/* Based on C++ map mechanism, if a key is not exist, access the key will assign a default value to the key. so if you simply test if map[key] is 0 or not by using "if (map[key] == 0)" without testing if the key is in the map. you will consume extra space....you could avoid allocate extra space either by find or count method. I usually use count, it is more concise.*/
+
+
+
+
+3.  TC O(NLOGN)+(MLOGM)+O(N)+O(M)   SC O(1)
 
 class Solution {
 public:
-    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
         sort(nums1.begin(), nums1.end());
         sort(nums2.begin(), nums2.end());
         int n1 = (int)nums1.size(), n2 = (int)nums2.size();
@@ -47,35 +98,10 @@ public:
             else{
                 i1++;
             }
-            while(i1 > 0 && i1 < n1 && nums1[i1] == nums1[i1 - 1]) i1++;  //If elements aree simmilar keep skipping the elemnts.
-            while(i2 > 0 && i2 < n2 && nums2[i2] == nums2[i2 - 1]) i2++;
-        }
-        return res;
-    }
-};
-
-
-2.
-
-class Solution {
-public:
-    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-        
-        vector<int> res;
-        unordered_map<int, int > um ;
-     
-        for(int i=0;i<nums1.size();i++){
-            um[nums1[i]]++;
-        }
-        
-        for(int i=0; i<nums2.size(); i++){
-            if(um[nums2[i]] > 0){          
-                res.push_back(nums2[i]);
-                um[nums2[i]]--;
-            }
+         //   while(i1 > 0 && i1 < n1 && nums1[i1] == nums1[i1 - 1]) i1++;  //If elements aree simmilar keep skipping the elemnts.
+          //  while(i2 > 0 && i2 < n2 && nums2[i2] == nums2[i2 - 1]) i2++;
         }
         return res;
    
     }
 };
-
