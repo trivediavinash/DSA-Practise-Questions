@@ -86,5 +86,5 @@ long long  multiplyTwoLists (Node* l1, Node* l2)
                l2=l2->next;
            }
       }
-      return (l1data*l2data)%1000000007;
+      return   (l1data*l2data)%1000000007;
 }
