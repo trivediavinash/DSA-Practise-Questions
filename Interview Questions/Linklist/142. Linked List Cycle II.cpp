@@ -6,7 +6,7 @@ There is a cycle in a linked list if there is some node in the list that can be 
 Notice that you should not modify the linked list.
 
  
-
+ 
 Example 1:
 
 
@@ -50,7 +50,8 @@ public:
             slow = slow->next;
             if(fast==slow) break;
         }
-        if(fast==NULL or fast->next==NULL) return NULL;
+        if(fast==NULL or fast->next==NULL) return NULL;  //this condition will return null when linklist has no cycle as fast or fast->next will be null .
+//else fast and fast->next will never false  coz if linklist has cycle it will never be ended with null.
         slow = head;
         while(slow!=fast){
             slow = slow->next;

@@ -59,7 +59,7 @@ public:
     }
 };
 
-3.O(N*LogM) N= rows M =columns O(1)
+3.O(N*LogM) N= rows M =columns     O(1)
 
 class Solution {
   public:
@@ -92,6 +92,25 @@ public:
             else i++;
         }
         return 0;
+    }
+};
+
+4 O(Log(m*n)) O(1)   2d matrix can be treated as 1d
+
+class Solution {
+  public:
+    bool searchMatrix(vector < vector < int >> & matrix, int target) {
+      if (matrix.size() == 0) return 0;
+      int m = matrix.size(), n = matrix[0].size();
+      int s = 0, e = m * n - 1;
+      while (s <= e) {
+        int mid = s + (e - s) / 2;
+        if (matrix[mid / n][mid % n] == target) return 1;
+        else if (matrix[mid / n][mid % n] > target) e = mid - 1;
+        else s = mid + 1;
+      }
+
+      return 0;
     }
 };
 
