@@ -92,3 +92,46 @@ public:
         return l4->next;
     }
 };
+
+2.
+
+
+
+class Solution {
+  public:
+    ListNode * mergeTwoLists(ListNode * l1, ListNode * l2) {
+      ListNode * l3 = new ListNode(0);
+      ListNode * l4 = l3;
+      if (l1 == NULL) return l2;
+      if (l2 == NULL) return l1;
+
+      while (l1 and l2) {
+        if (l1 -> val < l2 -> val) {
+          l3 -> next = new ListNode(l1 -> val);
+
+          l1 = l1 -> next;
+
+        } else {
+          l3 -> next = new ListNode(l2 -> val);
+
+          l2 = l2 -> next;
+        }
+        l3 = l3 -> next;
+
+      }
+      /*   while(l1){
+                  l3->next= new ListNode(l1->val);
+                   l3=l3->next;
+                  l1=l1->next;
+         }
+         while(l2){
+              l3->next= new ListNode(l2->val);
+              l3=l3->next;
+              l2=l2->next;
+         }   */
+      //Alternatively 
+      if (l1 == NULL) l3 -> next = l2; //if one of list is exhausted then just shift pointer of newly formed list to another list as elements in second list are alredy sorted;
+      if (l2 == NULL) l3 -> next = l1;
+      return l4 -> next;
+    }
+};
