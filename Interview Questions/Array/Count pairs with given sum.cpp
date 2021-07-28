@@ -37,59 +37,54 @@ Constraints:
 
 Company Tags
  Accolite Adobe Amazon FactSet Flipkart Goldman Sachs Hike
-
 */
-Here we have hashed all the values once .
-1. O(N) + O(N) O(1)
 
-class Solution {
-  public:
+1.O(N^2) O(1)
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+//User function template for C++
+
+class Solution{   
+public:
     int getPairsCount(int arr[], int n, int k) {
-      int ans = 0;
-      unordered_map < int, int > um;
-      for (int i = 0; i < n; i++) {
-        um[arr[i]]++;
-      }
-      for (int i = 0; i < n; i++) {
-        int target = k - arr[i];
-        if (um.count(target)) {
-          if (target == arr[i]) { // for duplicate cases like 1 1 1 1   k = 2 
-            um[arr[i]]--;
-            ans += um[target];
-
-          } else {
-            ans += um[target]; //add the no of occurance of taget value 
-            um[arr[i]]--; // decrease the count of occurance of current value as it is paired with the value and hence no need do consider it again in map .
-          }
+        int ans=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if (arr[i]+arr[j]==k){
+                    ans++;
+                }
+            }
         }
-
-      }
-      return ans;
+        return ans;
     }
 };
 
-2. O(N) O(1)
+2.O(N) O(N)
 
-class Solution {
-  public:
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+//User function template for C++
+
+class Solution{   
+public:
     int getPairsCount(int arr[], int n, int k) {
-      int ans = 0;
-      unordered_map < int, int > um;
-
-      for (int i = 0; i < n; i++) {
-        int target = k - arr[i];
-        if (um.count(target)) {
-
-          ans += um[target]; //counting the occurance of target 
-          // um[arr[i]]--;
+        int ans = 0;
+        unordered_map<int, int>um;
+        
+        for(int i = 0 ; i < n ; i++){
+            int target = k - arr[i];
+            if(um.count(target)){
+                
+                    ans += um[target];
+                   // um[arr[i]]--;
+                }
+             um[arr[i]]++;
         }
-        um[arr[i]]++; //hashing all the elements no matter what.
-      }
-      return ans;
+        return ans;
     }
 };
-
-
-
-
-
