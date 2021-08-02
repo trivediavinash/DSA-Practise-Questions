@@ -37,7 +37,7 @@ Testcase 2: 4th smallest elemets in the given array is 15.
 
 */
 
-Method 
+Method O(NLogN) O(1) 
 1.
 #include <iostream>
 
@@ -67,78 +67,71 @@ int main() {
 }
 
 
-
-
-Faltu
-
-
-#include <iostream>
-#include<climits>
-#include <algorithm>
-using namespace std;
-
-int partition (int arr[],  int l, int r)
-{
-  l=0;
-  //r=n-1;
-  int i= l -1;
-  int pivot =arr[r];
-  
-  for(int j=l;j<=r-1;j++){
-      if(arr[j]<pivot){
-          i++;
-          swap(arr[i],arr[j]);
+2.  Worst-case performance	О(n2) -   
+Best-case performance	О(n)    n + n/2 + n/4 + n/8 = n(1+ 1/2 + 1/4 ) = n 
+Average performance	O(n)
+class Solution{
+    int lomutopartition(int  arr[],int left, int right){
+        int i = left-1 , j = left ;
+        int random = left + rand() % (right - left+1);
+        swap(arr[right], arr[random]);
+        int pivot = arr[right];
+        while(j<right){
+            if(arr[j]<pivot){
+                i++;
+                swap(arr[i],arr[j]);
+            }
+            j++;
         }
-  }
-  swap(arr[i+1],arr[r]);
-  return i+1;
-}
+        swap(arr[i+1],arr[right]);  
+        return i+1;
+    }
+    
+    
 
-int kthSmallest(int arr[], int l, int r, int k) 
-{ 
-    // If k is smaller than number of  
-    // elements in array 
-    if (k > 0 && k <= r - l + 1) { 
-  
-        // Partition the array around last  
-        // element and get position of pivot  
-        // element in sorted array 
-        int index = partition(arr, l, r); 
-  
-        // If position is same as k 
-        if (index - l == k - 1) 
-            return arr[index]; 
-  
-        // If position is more, recur  
-        // for left subarray 
-        if (index - l > k - 1)  
-            return kthSmallest(arr, l, index - 1, k); 
-  
-        // Else recur for right subarray 
-        return kthSmallest(arr, index + 1, r,  
-                            k - index + l - 1); 
-    } 
-  
-} 
-  
+    int findKthLargest(int  arr[],int left, int right, int k) {
+     
+        while(true){
+             int idx = lomutopartition(arr, left , right);
+             if(idx == k-1) {
+                 return arr[k-1];
+                 break;
+             }
+            else if(idx < k-1)  left = idx+1;
+            else if (idx>k-1)  right = idx-1;
+        
+            
+        }
+         return 0;
+    }
+    public:
+    // arr : given array
+    // l : starting index of the array i.e 0
+    // r : ending index of the array i.e size-1
+    // k : find kth smallest element and return using this function
+    int kthSmallest(int arr[], int l, int r, int k) {
+        return findKthLargest( arr, l,  r ,  k ) ;
+        
+    }
+};
 
-int main() {
-	int t;
-	cin>>t;
-	while(t--){
-	    int n;
-        cin>>n;
-	    int arr[n];
-	    for(int i=0;i<n;i++){
-		    cin>>arr[i];
-		    
-		    
-		    
-	     }
-	     int k;
-		 cin>>k;
-	 
-	     cout<<kthSmallest(arr, 0,   n-1,  k)<<endl;
-	}
-	return 0;
-}
+3 .  O(Nlogk) O(Logk)
+class Solution{
+    public:
+    // arr : given array
+    // l : starting index of the array i.e 0
+    // r : ending index of the array i.e size-1
+    // k : find kth smallest element and return using this function
+    int kthSmallest(int arr[], int l, int r, int k) {
+        priority_queue<int> pq;   //max heap
+       
+       
+        for(int i = 0 ;i<=r ;i++){
+            pq.push(arr[i]);
+            if(pq.size()>k) pq.pop();    
+        }
+        
+        return pq.top();
+    }
+};
+

@@ -95,5 +95,54 @@ public:
 };
 
 
-4.Quicselect Algo 
 
+
+
+4.Worst-case performance	О(n2) -  1 2 3 4 5 finding 5th largest 
+Best-case performance	О(n)    n + n/2 + n/4 + n/8 = n(1+ 1/2 + 1/4 ) = n 
+Average performance	O(n)
+
+Quicselect Algo (Lomuto partitioning with or without randomisation ) (Randomisation is very fast )
+
+
+// In lomuto partitioning while partitioning, element smaller than pivot chhosen as rightmost element, are arranges in left of pivot and elemetns greater than pivot always comes in right  .so it will be usefull to directly compare k with finding kth smallest element .
+//In case of finding largest element k should be modified so that our partitioning indx can be matched .k = size - k . 
+
+class Solution {
+  int lomutoPartition(vector < int > & nums, int left, int right) {
+    int i = left - 1, j = left;
+    //we can also use randomized partion .
+    // int randomIdx = left+ rand()%(right-left+1);   //genarting random indices using rand funtion   
+    //  swap(nums[randomIdx], nums[right]);
+    int pivot = nums[right];
+    while (j < right) {
+      if (nums[j] <= pivot) {
+        i++;
+        swap(nums[i], nums[j]);
+      }
+      j++;
+    }
+    swap(nums[i + 1], nums[right]);
+    return i + 1;
+  }
+
+  //searching the kth element by index like kth largest element will have k-1 index in sorted array (in decresing order) 4 3 2 1 2nd largest is 3 
+  //since in lumuto partitioning larger elements are in right part so we have to modify the k value as pos = nums.size()-k; partition funtion is calling in only half part always .
+  public:
+    int findKthLargest(vector < int > & nums, int k) {
+      int left = 0, right = nums.size() - 1, pos = nums.size() - k;
+      while (true) {
+        int idx = lomutoPartition(nums, left, right);
+        if (idx == pos) {
+          return nums[pos];
+          break;
+        } else if (idx < pos - 1) left = idx + 1;
+        else if (idx > pos - 1) right = idx - 1;
+
+      }
+      return 0;
+    }
+};
+
+
+ 
