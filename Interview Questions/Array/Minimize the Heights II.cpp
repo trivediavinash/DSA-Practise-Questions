@@ -9,7 +9,7 @@ Example 1:
 
 Input:
 K = 2, N = 4
-Arr[] = {1, 5, 8, 10}
+     Arr[] = {1, 5, 8, 10}
 Output:
 5
 Explanation:
