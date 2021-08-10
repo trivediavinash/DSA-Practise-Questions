@@ -101,9 +101,9 @@ public:
               // if current node is not null, print it and push its right child
              // to the stack and move to its left child
              if(curr!=NULL){
-                 ans.push_back(curr->val);
-                 if(curr->right){
-                     s.push(curr->right);
+                 ans.push_back(curr->val);   //pushing only the left children into ans 
+                 if(curr->right){               
+                     s.push(curr->right);   //checking right nodes and pushing it into stack 
                      
                  }
                curr=curr->left;

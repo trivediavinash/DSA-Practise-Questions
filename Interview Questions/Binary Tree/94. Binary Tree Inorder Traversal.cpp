@@ -34,8 +34,12 @@ The number of nodes in the tree is in the range [0, 100].
 -100 <= Node.val <= 100
 */
 
-1.Recursive
+1.Recursive   T.C. = O(N) 
+/*
+If we don’t consider size of stack for function calls then O(1) otherwise O(h) where h is the height of the tree. 
 
+The height of the skewed tree is n (no. of elements) so the worst space complexity is O(n) and height is (Log n) for balanced tree so the best space complexity is O(Log n).
+*/
 class Solution {
 public:
     //paasing ans by reference so that after each call of traversal fun  vector ans get update in main funtion.
@@ -53,7 +57,7 @@ public:
 };
 
 2.Iterative
-
+O(N) O(N)   
 class Solution {
 public:
    
